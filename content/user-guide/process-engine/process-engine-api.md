@@ -54,7 +54,7 @@ ProcessEngineConfiguration
 此外，这项仓库服务（RepositoryService）允许：
 
 *  查询引擎已知的部署和流程定义。
-*  失效和激活流程定义。失效意味着不能对它们做进一步的操作，而激活则是相反的操作。
+*  挂起和激活流程定义。挂起意味着不能对它们做进一步的操作，而激活则是相反的操作。
 *  检索各种资源，如部署中包含的文件或由引擎自动生成的流程图。
 
 RepositoryService是关于静态信息的（即，不改变的数据，或者至少不会改变很多的），而**RuntimeService**则完全相反。它处理的是启动流程定义的新流程实例。如上所述，一个流程定义定义了流程中不同步骤的结构和行为。一个流程实例是这样流程定义的一次执行。对于每个流程定义，通常有许多实例在同时运行。RuntimeService也是用于检索和存储[流程变量]({{< ref "/user-guide/process-engine/variables.md" >}})的服务。这是某个特定流程实例的数据，可以被流程中的各种构造使用（例如，排他网关经常使用流程变量来确定选择哪条路径继续流程）。RuntimeService还允许对流程实例和执行进行查询。执行（Executions）是BPMN 2.0中'token'的概念。一般来说，执行是一个指针，指向流程实例当前所在的位置。最后，当流程实例在等待外部触发并且流程需要继续时，RuntimeService就会被使用。流程实例可以有各种等待状态，这个服务包含各种操作，以 "通知" 实例已经收到外部触发，流程实例可以继续执行。
@@ -91,7 +91,7 @@ RepositoryService是关于静态信息的（即，不改变的数据，或者至
 
 要从引擎中查询数据，有多种可能性。
 
-* Java查询API。流利的Java API可以查询引擎实体（如ProcessInstances, Tasks, ...）。
+* Java查询API。链式Java API可以查询引擎实体（如ProcessInstances, Tasks, ...）。
 * REST查询API。REST API来查询引擎实体（如ProcessInstances、Tasks...）。
 * 本地查询。提供自己的SQL查询，以检索引擎实体（如ProcessInstances，Tasks，...），如果查询API缺乏你需要的可能性（例如，OR条件）。
 * 自定义查询。使用完全定制的查询和自己的MyBatis映射来检索自己的价值对象，或将引擎与领域数据连接起来。
